@@ -1,2 +1,2 @@
 # anymarket-java-api
-AnyMarket API client for Java
+ANYMARKET API client for Java
