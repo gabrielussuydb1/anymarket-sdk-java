@@ -1,5 +1,8 @@
 package br.com.anymarket.sdk.http;
 
+import br.com.anymarket.sdk.exception.HttpClientException;
+import br.com.anymarket.sdk.exception.HttpServerException;
+import br.com.anymarket.sdk.exception.UnauthorizedException;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -36,13 +39,11 @@ public class HttpService {
         return post.body(writeValue(body));
     }
 
-    protected Response execute(BaseRequest request) {
-        try {
-            HttpResponse<String> response = request.asString();
-            return new Response(response.getStatus(), response.getBody());
-        } catch (UnirestException e) {
-            return null;
-        }
+    protected HttpRequestWithBody delete(String url, IntegrationHeader... headers) {
+        HttpRequestWithBody delete = Unirest.delete(url);
+        addHeaders(delete, headers);
+
+        return delete;
     }
 
     public <T> T readValue(String value, TypeReference<T> valueType) {
@@ -65,6 +66,30 @@ public class HttpService {
         for (IntegrationHeader header : headers) {
             request.header(header.getKey(), header.getValue());
         }
+    }
+
+    protected Response execute(BaseRequest request) {
+        try {
+            HttpResponse<String> response = request.asString();
+            checkGenericErrorToThrowGenericException(response);
+            return new Response(response.getStatus(), response.getBody());
+        } catch (UnirestException e) {
+            return null;
+        }
+    }
+
+    private void checkGenericErrorToThrowGenericException(HttpResponse<String> response) {
+        int statusCode = response.getStatus();
+        if(statusCode >= 500){
+            throw new HttpServerException(response.getBody());
+        }
+        else if(statusCode == 401){
+            throw new UnauthorizedException(response.getBody());
+        }
+        else if(statusCode >= 400 && statusCode != 404){
+            throw new HttpClientException(response.getBody());
+        }
+
     }
 
 }
