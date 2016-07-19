@@ -1,7 +1,6 @@
 package br.com.anymarket.sdk.callback.dto;
 
 import br.com.anymarket.sdk.AnymarketPojo;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 
 /**
@@ -11,7 +10,6 @@ public class Callback implements AnymarketPojo {
 
     private String id;
 
-    @JsonProperty("name")
     private String url;
 
     public Callback() {
