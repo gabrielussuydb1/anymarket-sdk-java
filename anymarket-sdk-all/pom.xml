@@ -44,6 +44,10 @@
       <groupId>${project.groupId}</groupId>
       <artifactId>anymarket-sdk-delegator</artifactId>
     </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>anymarket-sdk-callback</artifactId>
+    </dependency>
   </dependencies>
 
 

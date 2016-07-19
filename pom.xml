@@ -15,6 +15,7 @@
     <module>anymarket-sdk-monitor</module>
     <module>anymarket-sdk-categories</module>
     <module>anymarket-sdk-delegator</module>
+    <module>anymarket-sdk-callback</module>
   </modules>
   <packaging>pom</packaging>
 
@@ -72,6 +73,11 @@
       <dependency>
         <groupId>${project.groupId}</groupId>
         <artifactId>anymarket-sdk-delegator</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>anymarket-sdk-callback</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
