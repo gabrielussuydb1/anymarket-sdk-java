@@ -61,7 +61,7 @@ public class CallbackService extends HttpService {
     }
 
     public Callback getCallback(Long id, IntegrationHeader... headers) {
-        GetRequest getRequest = get(apiEndPoint + CALLBACKS_URI + id, headers);
+        GetRequest getRequest = get(apiEndPoint.concat(CALLBACKS_URI).concat(id.toString()), headers);
         Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             return response.to(Callback.class);
