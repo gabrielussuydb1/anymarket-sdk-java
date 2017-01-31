@@ -94,6 +94,12 @@ public class Order {
     @JsonProperty("observation")
     private String observation;
 
+    @JsonProperty("orderType")
+    private OrderType orderType;
+
+    @JsonProperty("originNumber")
+    private String originNumber;
+
     public Long getId() {
         return id;
     }
@@ -302,6 +308,22 @@ public class Order {
         this.interestValue = interestValue;
     }
 
+    public OrderType getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(OrderType orderType) {
+        this.orderType = orderType;
+    }
+
+    public String getOriginNumber() {
+        return originNumber;
+    }
+
+    public void setOriginNumber(String originNumber) {
+        this.originNumber = originNumber;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -313,6 +335,8 @@ public class Order {
             .add("paymentDate", paymentDate)
             .add("transmissionStatus", transmissionStatus)
             .add("status", status)
+            .add("type", orderType)
+            .add("originNumber", originNumber)
             .add("marketPlaceUrl", marketPlaceUrl)
             .add("marketPlaceShipmentStatus", marketPlaceShipmentStatus)
             .add("invoice", invoice)
