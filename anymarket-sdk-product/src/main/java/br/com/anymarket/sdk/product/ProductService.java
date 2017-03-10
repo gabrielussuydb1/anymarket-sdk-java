@@ -1,5 +1,6 @@
 package br.com.anymarket.sdk.product;
 
+import br.com.anymarket.sdk.MarketPlace;
 import br.com.anymarket.sdk.SDKConstants;
 import br.com.anymarket.sdk.exception.NotFoundException;
 import br.com.anymarket.sdk.http.HttpService;
@@ -17,7 +18,9 @@ import com.mashape.unirest.request.body.RequestBodyEntity;
 import org.apache.http.HttpStatus;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
 import static java.lang.String.format;
@@ -133,6 +136,16 @@ public class ProductService extends HttpService {
             throw new NotFoundException("Products not found.");
         }
         return allProducts;
+    }
+
+    public Map<String, String> getActiveAttributesByMarketPlace(Long idProduct, MarketPlace marketPlace, IntegrationHeader... headers){
+        String url = apiEndPoint.concat(PRODUCTS_URI).concat("/").concat(idProduct.toString()).concat("/attributes/").concat(marketPlace.name());
+        GetRequest getRequest = get(url, headers);
+        Response response = execute(getRequest);
+        if (response.getStatus() == HttpStatus.SC_OK) {
+            return response.to(HashMap.class);
+        }
+        throw new NotFoundException(format("Product(id: %is) active attributes not found to this marketplace(%s).", idProduct, marketPlace.name()));
     }
 
 }

@@ -1,5 +1,6 @@
 package br.com.anymarket.sdk.product;
 
+import br.com.anymarket.sdk.MarketPlace;
 import br.com.anymarket.sdk.SDKConstants;
 import br.com.anymarket.sdk.exception.NotFoundException;
 import br.com.anymarket.sdk.http.HttpService;
@@ -21,7 +22,7 @@ import static java.lang.String.format;
 
 public class SkuMarketPlaceService extends HttpService {
 
-    private static final String SKUMP_URI = "/skus/%s/marketplaces/";
+    private static final String SKUMP_URI = "/skus/%s/marketplaces";
     private final String apiEndPoint;
 
     public SkuMarketPlaceService(final String apiEndPoint) {
@@ -89,8 +90,12 @@ public class SkuMarketPlaceService extends HttpService {
     }
 
     public List<SkuMarketPlace> getAllSkuMps(Long idSku, IntegrationHeader... headers) {
+        return getAllSkuMps(idSku, null, headers);
+    }
+    public List<SkuMarketPlace> getAllSkuMps(Long idSku, MarketPlace marketPlace, IntegrationHeader... headers) {
         final List<SkuMarketPlace> allSkuMps = Lists.newArrayList();
-        final GetRequest getRequest = get(getURLFormated(idSku).concat("/"), headers);
+        String urlFormated = getURLFormated(idSku);
+        final GetRequest getRequest = get(marketPlace == null ? urlFormated : urlFormated.concat("?marketplace=").concat(marketPlace.name()), headers);
         final Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             List<SkuMarketPlace> rootResponse = response.to(new TypeReference<List<SkuMarketPlace>>() {
