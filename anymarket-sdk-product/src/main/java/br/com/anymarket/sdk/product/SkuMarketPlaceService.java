@@ -144,7 +144,7 @@ public class SkuMarketPlaceService extends HttpService {
     }
 
     public List<SkuMarketPlace> getSkuAndMarketplaceByMarketplace(MarketPlace marketPlace, PublicationStatus status, IntegrationHeader... headers) {
-        Objects.requireNonNull(marketPlace, "Informe o Marketplace");
+        Objects.requireNonNull(marketPlace, "Informe o Marketplace");//***
 
         final List<SkuMarketPlace> allSkuMps = Lists.newArrayList();
         String urlFormated = String.format(apiEndPoint.concat(SKUMP_ALL_MARKETPLACE), marketPlace);
@@ -153,7 +153,14 @@ public class SkuMarketPlaceService extends HttpService {
         if (response.getStatus() == HttpStatus.SC_OK) {
             Page<SkuMarketPlace> rootResponse = response.to(new TypeReference<Page<SkuMarketPlace>>() {
             });
+
             allSkuMps.addAll(rootResponse.getContent());
+
+            while(!rootResponse.getContent().isEmpty()){
+                rootResponse = getNextSkuAndMarketplaceByMarketplace(rootResponse, headers);
+                allSkuMps.addAll(rootResponse.getContent());
+            }
+
         }
         return allSkuMps;
     }
