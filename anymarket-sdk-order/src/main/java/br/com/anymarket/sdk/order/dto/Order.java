@@ -149,7 +149,7 @@ public class Order {
     private Boolean fulfillment;
 
     @JsonProperty("shipments")
-    private List<OrderShipmentResource> shipments;
+    private List<OrderShipmentResource> shipments = new ArrayList<OrderShipmentResource>();
 
     public boolean isFrozen() {
         return MarketPlace.NETSHOES.equals(marketPlace) && FROZEN.equalsIgnoreCase(Strings.nullToEmpty(marketPlaceStatus));

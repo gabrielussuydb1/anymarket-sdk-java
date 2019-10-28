@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class OrderShipmentResource {
     private String shipmentExceptionDescription;
 
     @JsonProperty("items")
-    private List<OrderShipmentItemResource> items;
+    private List<OrderShipmentItemResource> items = new ArrayList<OrderShipmentItemResource>();
 
     @JsonProperty("cancelDetails")
     private String cancelationDetails;
