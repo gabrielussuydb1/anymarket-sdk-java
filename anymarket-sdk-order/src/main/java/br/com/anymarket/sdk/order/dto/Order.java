@@ -3,6 +3,7 @@ package br.com.anymarket.sdk.order.dto;
 import br.com.anymarket.sdk.MarketPlace;
 import br.com.anymarket.sdk.serializer.SDKDateSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.base.MoreObjects;
@@ -148,8 +149,9 @@ public class Order {
     @JsonProperty("fulfillment")
     private Boolean fulfillment;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonProperty("shipments")
-    private List<OrderShipmentResource> shipments = new ArrayList<OrderShipmentResource>();
+    private List<OrderShipmentResource> shipments;
 
     public boolean isFrozen() {
         return MarketPlace.NETSHOES.equals(marketPlace) && FROZEN.equalsIgnoreCase(Strings.nullToEmpty(marketPlaceStatus));

@@ -55,8 +55,9 @@ public class OrderShipmentResource {
     @JsonProperty("shipmentExceptionDescription")
     private String shipmentExceptionDescription;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonProperty("items")
-    private List<OrderShipmentItemResource> items = new ArrayList<OrderShipmentItemResource>();
+    private List<OrderShipmentItemResource> items;
 
     @JsonProperty("cancelDetails")
     private String cancelationDetails;
