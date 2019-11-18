@@ -28,6 +28,9 @@ public class OrderShipmentItemResource {
     @JsonProperty("idInMarketPlace")
     private String idInMarketPlace;
 
+    @JsonProperty("skuInMarketplace")
+    private String skuInMarketplace;
+
     public OrderShipmentItemResource() {
         super();
     }
@@ -88,6 +91,14 @@ public class OrderShipmentItemResource {
         this.idInMarketPlace = idInMarketPlace;
     }
 
+    public String getSkuInMarketplace() {
+        return skuInMarketplace;
+    }
+
+    public void setSkuInMarketplace(String skuInMarketplace) {
+        this.skuInMarketplace = skuInMarketplace;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -98,6 +109,7 @@ public class OrderShipmentItemResource {
                 .add("total", total)
                 .add("discount", discount)
                 .add("idInMarketPlace", idInMarketPlace)
+                .add("skuInMarketplace", skuInMarketplace)
                 .toString();
     }
 }
