@@ -38,6 +38,9 @@ public class Image {
     @JsonProperty("lowResolutionUrl")
     private URL lowResolutionUrl;
 
+    @JsonProperty("originalImageInS3URL")
+    private URL originalImageInS3URL;
+
     @JsonProperty("url")
     private URL url;
 
@@ -49,6 +52,18 @@ public class Image {
 
     @JsonProperty("main")
     private boolean main;
+
+    @JsonProperty("standardWidth")
+    private Integer standardWidth;
+
+    @JsonProperty("standardHeight")
+    private Integer standardHeight;
+
+    @JsonProperty("originalWidth")
+    private Integer originalWidth;
+
+    @JsonProperty("originalHeight")
+    private Integer originalHeight;
 
     public Long getId() {
         return id;
@@ -98,6 +113,14 @@ public class Image {
         this.lowResolutionUrl = lowResolutionUrl;
     }
 
+    public URL getOriginalImageInS3URL() {
+        return originalImageInS3URL;
+    }
+
+    public void setOriginalImageInS3URL(URL originalImageInS3URL) {
+        this.originalImageInS3URL = originalImageInS3URL;
+    }
+
     public URL getUrl() {
         return url;
     }
@@ -130,6 +153,38 @@ public class Image {
         this.main = main;
     }
 
+    public Integer getStandardWidth() {
+        return standardWidth;
+    }
+
+    public void setStandardWidth(Integer standardWidth) {
+        this.standardWidth = standardWidth;
+    }
+
+    public Integer getStandardHeight() {
+        return standardHeight;
+    }
+
+    public void setStandardHeight(Integer standardHeight) {
+        this.standardHeight = standardHeight;
+    }
+
+    public Integer getOriginalWidth() {
+        return originalWidth;
+    }
+
+    public void setOriginalWidth(Integer originalWidth) {
+        this.originalWidth = originalWidth;
+    }
+
+    public Integer getOriginalHeight() {
+        return originalHeight;
+    }
+
+    public void setOriginalHeight(Integer originalHeight) {
+        this.originalHeight = originalHeight;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -139,10 +194,15 @@ public class Image {
             .add("thumbnailUrl", thumbnailUrl)
             .add("standardUrl", standardUrl)
             .add("lowResolutionUrl", lowResolutionUrl)
+            .add("originalImageInS3URL", originalImageInS3URL)
             .add("url", url)
             .add("statusMessage", statusMessage)
             .add("status", status)
             .add("main", main)
+            .add("standardWidth", standardWidth)
+            .add("standardHeight", standardHeight)
+            .add("originalWidth", originalWidth)
+            .add("originalHeight", originalHeight)
             .toString();
     }
 }
