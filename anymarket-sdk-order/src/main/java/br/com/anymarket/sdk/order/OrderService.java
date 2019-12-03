@@ -183,4 +183,20 @@ public class OrderService {
             .getResponse()
             .to(Order.class);
     }
+
+    public Order updateShipmentTransmissionStatus(Long idOrder, Long shipmentIndex,
+                                                  OrderTransmissionStatusResource resource,
+                                                  IntegrationHeader... headers) {
+        checkNotNull(idOrder, "Erro ao atualizar pedido: Id não informado");
+        checkNotNull(shipmentIndex, "Erro ao atualizar pedido: ShipmentIndex não informado");
+        checkNotNull(resource, "Erro ao atualizar pedido: Dados de TransmissionStatus não encontrados.");
+        return put(apiEndPointForResource.concat("/orders/{orderId}/shipments/{shipmentIndex}/transmissionStatus"))
+                .body(resource)
+                .headers(headers)
+                .routeParam("orderId", idOrder.toString())
+                .routeParam("shipmentIndex", shipmentIndex.toString())
+                .getResponse()
+                .to(Order.class);
+    }
+
 }
