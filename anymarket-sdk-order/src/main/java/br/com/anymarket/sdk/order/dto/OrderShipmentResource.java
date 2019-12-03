@@ -16,7 +16,7 @@ public class OrderShipmentResource {
     private Long index;
 
     @JsonProperty("status")
-    private OrderStatus status;
+    private NewOrderStatus status;
 
     @JsonProperty("tracking")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
@@ -74,11 +74,11 @@ public class OrderShipmentResource {
         this.index = index;
     }
 
-    public OrderStatus getStatus() {
+    public NewOrderStatus getStatus() {
         return status;
     }
 
-    public void setStatus(OrderStatus status) {
+    public void setStatus(NewOrderStatus status) {
         this.status = status;
     }
 
