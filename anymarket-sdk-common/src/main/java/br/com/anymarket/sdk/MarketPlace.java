@@ -42,7 +42,8 @@ public enum MarketPlace {
     GARBARINO("Garbarino"),
     NOVOMUNDO("Novo Mundo"),
     POSTHAUS("Posthaus"),
-    MARABRAZ("Marabraz");
+    MARABRAZ("Marabraz"),
+    NUVEMSHOP("Nuvemshop");
 
     private String name;
 
