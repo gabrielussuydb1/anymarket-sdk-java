@@ -2,21 +2,21 @@ package br.com.anymarket.sdk.product;
 
 import br.com.anymarket.sdk.MarketPlace;
 import br.com.anymarket.sdk.SDKConstants;
+import br.com.anymarket.sdk.exception.HttpServerException;
 import br.com.anymarket.sdk.exception.NotFoundException;
 import br.com.anymarket.sdk.http.HttpService;
 import br.com.anymarket.sdk.http.Response;
 import br.com.anymarket.sdk.http.headers.IntegrationHeader;
 import br.com.anymarket.sdk.paging.Page;
-import br.com.anymarket.sdk.product.dto.PublicationStatus;
-import br.com.anymarket.sdk.product.dto.SkuMarketPlace;
-import br.com.anymarket.sdk.product.dto.SkuMarketplacePriceErrors;
-import br.com.anymarket.sdk.product.dto.SkuMarketplacePriceResource;
+import br.com.anymarket.sdk.product.dto.*;
 import br.com.anymarket.sdk.resource.Link;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.collect.Lists;
 import com.mashape.unirest.request.GetRequest;
 import com.mashape.unirest.request.body.RequestBodyEntity;
 import org.apache.http.HttpStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Objects;
@@ -25,6 +25,8 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 import static java.lang.String.format;
 
 public class SkuMarketPlaceService extends HttpService {
+
+    private static final Logger LOG = LoggerFactory.getLogger(SkuMarketPlaceService.class);
 
     private static final String SKUMP_URI = "/skus/%s/marketplaces";
     private static final String SKUMP_UPDATE_PRICE_URI = "/skus/%s/updatePrice/%s";
@@ -82,13 +84,22 @@ public class SkuMarketPlaceService extends HttpService {
     }
 
     public SkuMarketPlace getSkuMarketPlace(Long idSku, Long idSkuMp, IntegrationHeader... headers) {
-        return getSkuMarketPlace(idSku, idSkuMp, false, headers);
+        return getSkuMarketPlace(idSku, idSkuMp, false, null, headers);
+    }
+
+    public SkuMarketPlace getSkuMarketPlaceWithSku(Long idSku, Long idSkuMp, IntegrationHeader... headers) {
+        return getSkuMarketPlace(idSku, idSkuMp, false, "SKU_COMPLETE", headers);
     }
 
     public SkuMarketPlace getSkuMarketPlace(Long idSku, Long idSkuMp, boolean multiCd, IntegrationHeader... headers) {
+        return getSkuMarketPlace(idSku, idSkuMp, multiCd, null, headers);
+    }
+
+    public SkuMarketPlace getSkuMarketPlace(Long idSku, Long idSkuMp, boolean multiCd, String skuMarketplaceReturnType, IntegrationHeader... headers) {
         Objects.requireNonNull(idSkuMp, "Informe o id do SkuMarketPlace.");
         Objects.requireNonNull(idSku, "Informe o id do SKU");
-        GetRequest getRequest = get(getURLFormated(idSku).concat("/").concat(idSkuMp.toString()).concat("?multiCd=" + multiCd), headers);
+        skuMarketplaceReturnType = skuMarketplaceReturnType == null ? "" : "&returnType=" + skuMarketplaceReturnType;
+        GetRequest getRequest = get(getURLFormated(idSku).concat("/").concat(idSkuMp.toString()).concat("?multiCd=" + multiCd).concat(skuMarketplaceReturnType), headers);
         Response response = execute(getRequest);
         if (response.getStatus() == HttpStatus.SC_OK) {
             return response.to(SkuMarketPlace.class);
@@ -194,5 +205,29 @@ public class SkuMarketPlaceService extends HttpService {
         return new Page<SkuMarketPlace>();
     }
 
+    public SkuMarketplaceComplete getSkuMarketplaceCompleteById(Long idSkuMarketplace, IntegrationHeader headers) {
+        Objects.requireNonNull(idSkuMarketplace, "Informe o idSkuMarketplace");
+
+        String endpoint = String.format("/skus/marketplaces/%s/complete", idSkuMarketplace);
+
+        GetRequest getRequest = get(apiEndPoint.concat(endpoint), headers);
+
+        try {
+            LOG.info("Chamando endpoint {}, headers {}", apiEndPoint.concat(endpoint), headers.toString());
+            Response response = execute(getRequest);
+            LOG.info("Response status {}", response.getStatus());
+
+            if (response.getStatus() == HttpStatus.SC_OK) {
+                return response.to(SkuMarketplaceComplete.class);
+            } else {
+                throw new NotFoundException(String.format("SkuMarketplace not found for id %s.", idSkuMarketplace));
+            }
+        } catch (HttpServerException e) {
+            throw e;
+        } catch (Exception e) {
+            LOG.error("Ocorreu um erro ao chamar endpoint {} com headers {}", this.apiEndPoint.concat(endpoint), headers.toString(), e);
+            throw new NotFoundException(String.format("SkuMarketplace not found for id %s.", idSkuMarketplace));
+        }
+    }
 
 }

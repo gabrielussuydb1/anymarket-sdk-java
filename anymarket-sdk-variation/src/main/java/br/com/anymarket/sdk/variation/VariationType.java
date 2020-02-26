@@ -66,4 +66,10 @@ public class VariationType {
     public void setValues(List<Variation> values) {
         this.values = values;
     }
+
+    public void addValueToList(Variation variation) {
+        if (variation != null && !this.values.contains(variation)) {
+            this.values.add(variation);
+        }
+    }
 }

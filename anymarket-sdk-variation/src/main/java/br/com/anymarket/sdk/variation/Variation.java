@@ -3,6 +3,8 @@ package br.com.anymarket.sdk.variation;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Objects;
+
 public class Variation {
 
     @JsonProperty("id")
@@ -48,4 +50,25 @@ public class Variation {
     public void setPartnerId(String partnerId) {
         this.partnerId = partnerId;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Variation variation = (Variation) o;
+        return Objects.equals(value, variation.value)
+                && Objects.equals(type, variation.type)
+                && Objects.equals(partnerId, variation.partnerId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value, type, partnerId);
+    }
+
+
 }

@@ -38,7 +38,7 @@ public class Image {
     @JsonProperty("lowResolutionUrl")
     private URL lowResolutionUrl;
 
-    @JsonProperty("originalImageInS3URL")
+    @JsonProperty("originalImage")
     private URL originalImageInS3URL;
 
     @JsonProperty("url")
@@ -194,7 +194,7 @@ public class Image {
             .add("thumbnailUrl", thumbnailUrl)
             .add("standardUrl", standardUrl)
             .add("lowResolutionUrl", lowResolutionUrl)
-            .add("originalImageInS3URL", originalImageInS3URL)
+            .add("originalImage", originalImageInS3URL)
             .add("url", url)
             .add("statusMessage", statusMessage)
             .add("status", status)

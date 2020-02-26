@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Order {
@@ -147,6 +148,12 @@ public class Order {
 
     @JsonProperty("fulfillment")
     private Boolean fulfillment;
+
+    @JsonProperty("shippingId")
+    private String shippingId;
+
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     public boolean isFrozen() {
         return MarketPlace.NETSHOES.equals(marketPlace) && FROZEN.equalsIgnoreCase(Strings.nullToEmpty(marketPlaceStatus));
@@ -488,6 +495,22 @@ public class Order {
         this.fulfillment = fulfillment;
     }
 
+    public String getShippingId() {
+        return shippingId;
+    }
+
+    public void setShippingId(String shippingId) {
+        this.shippingId = shippingId;
+    }
+
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -518,6 +541,7 @@ public class Order {
             .add("subChannelNormalized", subChannelNormalized)
             .add("orderMessage", orderMessage)
             .add("fulfillment", fulfillment)
+            .add("metadata", metadata)
             .toString();
     }
 }

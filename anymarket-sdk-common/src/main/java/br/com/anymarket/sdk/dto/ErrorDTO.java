@@ -1,11 +1,14 @@
 package br.com.anymarket.sdk.dto;
 
 
+import java.util.Map;
+
 public class ErrorDTO {
 
     private String code;
     private String message;
     private String details;
+    private Map<String, Object> resources;
 
     public String getCode() {
         return code;
@@ -29,5 +32,13 @@ public class ErrorDTO {
 
     public void setDetails(String details) {
         this.details = details;
+    }
+
+    public Map<String, Object> getResources() {
+        return resources;
+    }
+
+    public void setResources(Map<String, Object> resources) {
+        this.resources = resources;
     }
 }

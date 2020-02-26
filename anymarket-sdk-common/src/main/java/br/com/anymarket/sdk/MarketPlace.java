@@ -39,7 +39,10 @@ public enum MarketPlace {
     WISH("Wish"),
     HOME_TO_GO("Home To Go"),
     CONNECT_PARTS("Connect Parts"),
-    GARBARINO("Garbarino");
+    GARBARINO("Garbarino"),
+    NOVOMUNDO("Novo Mundo"),
+    POSTHAUS("Posthaus"),
+    MARABRAZ("Marabraz");
 
     private String name;
 

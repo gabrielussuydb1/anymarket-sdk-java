@@ -17,6 +17,7 @@ import com.mashape.unirest.request.HttpRequestWithBody;
 import com.mashape.unirest.request.body.RequestBodyEntity;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class HttpService {
 
@@ -90,10 +91,12 @@ public class HttpService {
         if (statusCode >= 400 && statusCode != 404) {
             String message = response.getBody();
             String details = null;
+            Map<String, Object> resources = null;
             try {
                 ErrorDTO errorDTO = Mapper.get().readValue(response.getBody(), ErrorDTO.class);
                 message = errorDTO.getMessage();
                 details = errorDTO.getDetails();
+                resources = errorDTO.getResources();
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
@@ -104,7 +107,7 @@ public class HttpService {
             } else if (statusCode == 401 || statusCode == 403) {
                 throw new UnauthorizedException(message);
             }
-            throw new HttpClientException(message, details);
+            throw new HttpClientException(message, details, resources);
         }
 
     }
