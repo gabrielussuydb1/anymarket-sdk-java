@@ -13,6 +13,9 @@ import java.util.List;
 
 public class OrderShipmentResource {
     @JsonProperty("id")
+    private Long id;
+
+    @JsonProperty("index")
     private Long index;
 
     @JsonProperty("status")
@@ -64,6 +67,14 @@ public class OrderShipmentResource {
 
     public OrderShipmentResource() {
         super();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getIndex() {
@@ -189,6 +200,7 @@ public class OrderShipmentResource {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
+                .add("id", id)
                 .add("index", index)
                 .add("status", status)
                 .add("tracking", tracking)
