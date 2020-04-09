@@ -2,8 +2,11 @@ package br.com.anymarket.sdk.order.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
+import com.google.common.collect.Lists;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderShipmentItemResource {
 
@@ -25,14 +28,26 @@ public class OrderShipmentItemResource {
     @JsonProperty("discount")
     private BigDecimal discount;
 
+    @JsonProperty("shippings")
+    private List<OrderItemShippingResource> shippings = new ArrayList();
+
+    @JsonProperty("marketPlaceId")
+    private String marketPlaceId;
+
+    @JsonProperty("orderItemId")
+    private Long orderItemId;
+
     @JsonProperty("idInMarketPlace")
     private String idInMarketPlace;
 
     @JsonProperty("skuInMarketplace")
     private String skuInMarketplace;
 
-    @JsonProperty("marketPlaceId")
-    private String marketPlaceId;
+    @JsonProperty("listingType")
+    private String listingType;
+
+    @JsonProperty("stocks")
+    private List<OrderItemStockResource> stocks = Lists.newArrayList();
 
     public OrderShipmentItemResource() {
         super();
@@ -110,6 +125,38 @@ public class OrderShipmentItemResource {
         this.marketPlaceId = marketPlaceId;
     }
 
+    public List<OrderItemShippingResource> getShippings() {
+        return shippings;
+    }
+
+    public void setShippings(List<OrderItemShippingResource> shippings) {
+        this.shippings = shippings;
+    }
+
+    public Long getOrderItemId() {
+        return orderItemId;
+    }
+
+    public void setOrderItemId(Long orderItemId) {
+        this.orderItemId = orderItemId;
+    }
+
+    public String getListingType() {
+        return listingType;
+    }
+
+    public void setListingType(String listingType) {
+        this.listingType = listingType;
+    }
+
+    public List<OrderItemStockResource> getStocks() {
+        return stocks;
+    }
+
+    public void setStocks(List<OrderItemStockResource> stocks) {
+        this.stocks = stocks;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -122,6 +169,8 @@ public class OrderShipmentItemResource {
                 .add("marketPlaceId", marketPlaceId)
                 .add("idInMarketPlace", idInMarketPlace)
                 .add("skuInMarketplace", skuInMarketplace)
+                .add("shippings", shippings)
+                .add("stocks", stocks)
                 .toString();
     }
 }
