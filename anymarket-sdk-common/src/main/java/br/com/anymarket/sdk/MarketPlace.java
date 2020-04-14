@@ -9,6 +9,7 @@ public enum MarketPlace {
     WALMART("Walmart"),
     VTEX("VTEX"),
     GFG("GFG - Dafiti"),
+    LINIO("Linio"),
     NETSHOES("Netshoes"),
     MAGAZINE_LUIZA("Magazine Luiza"),
     CARREFOUR("Carrefour"),
@@ -43,8 +44,8 @@ public enum MarketPlace {
     NOVOMUNDO("Novo Mundo"),
     POSTHAUS("Posthaus"),
     MARABRAZ("Marabraz"),
-    NUVEMSHOP("Nuvemshop");
-
+    NUVEMSHOP("Nuvemshop"),
+    LOJA_VIVO("Loja Vivo");
     private String name;
 
     private MarketPlace(String name) {
