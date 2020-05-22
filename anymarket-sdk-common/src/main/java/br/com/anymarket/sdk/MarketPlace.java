@@ -46,6 +46,7 @@ public enum MarketPlace {
     MARABRAZ("Marabraz"),
     LOJA_VIVO("Loja Vivo"),
     ESTANTE_VIRTUAL("Estante Virtual"),
+    NUVEMSHOP("Nuvemshop"),
     RI_HAPPY("Ri Happy"),
     FAST_SHOP("Fast Shop");
     private String name;
