@@ -33,6 +33,9 @@ public class Order {
     @JsonProperty("partnerId")
     private String partnerId;
 
+    @JsonProperty("partnerNumber")
+    private String partnerNumber;
+
     @JsonProperty("createdAt")
     @JsonSerialize(using = SDKDateSerializer.class)
     private Date createdAt;
@@ -509,6 +512,14 @@ public class Order {
 
     public void setMetadata(Map<String, String> metadata) {
         this.metadata = metadata;
+    }
+
+    public String getPartnerNumber() {
+        return partnerNumber;
+    }
+
+    public void setPartnerNumber(String partnerNumber) {
+        this.partnerNumber = partnerNumber;
     }
 
     @Override
