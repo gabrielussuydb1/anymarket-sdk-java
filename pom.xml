@@ -170,13 +170,13 @@
     <repository>
       <id>nexus</id>
       <name>RepositoryProxy</name>
-      <url>http://192.168.198.59:8081/nexus/content/repositories/releases/</url>
+      <url>http://nexus.anymarket.vpc:8081/nexus/content/repositories/releases/</url>
     </repository>
 
     <snapshotRepository>
       <id>nexus</id>
       <name>RepositoryProxy</name>
-      <url>http://192.168.198.59:8081/nexus/content/repositories/snapshots/</url>
+      <url>http://nexus.anymarket.vpc:8081/nexus/content/repositories/snapshots/</url>
     </snapshotRepository>
 
   </distributionManagement>
