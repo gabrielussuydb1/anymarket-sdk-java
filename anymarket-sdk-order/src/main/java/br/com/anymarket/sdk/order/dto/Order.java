@@ -161,6 +161,15 @@ public class Order {
     @JsonProperty("orderTypeName")
     private String orderTypeName;
 
+    @JsonProperty("documentIntermediator")
+    private String documentIntermediator;
+
+    @JsonProperty("intermediateRegistrationId")
+    private String intermediateRegistrationId;
+
+    @JsonProperty("documentPaymentInstitution")
+    private String documentPaymentInstitution;
+
     public boolean isFrozen() {
         return MarketPlace.NETSHOES.equals(marketPlace) && FROZEN.equalsIgnoreCase(Strings.nullToEmpty(marketPlaceStatus));
     }
@@ -533,6 +542,30 @@ public class Order {
         this.orderTypeName = orderTypeName;
     }
 
+    public String getIntermediateRegistrationId() {
+        return intermediateRegistrationId;
+    }
+
+    public void setIntermediateRegistrationId(String intermediateRegistrationId) {
+        this.intermediateRegistrationId = intermediateRegistrationId;
+    }
+
+    public String getDocumentIntermediator() {
+        return documentIntermediator;
+    }
+
+    public void setDocumentIntermediator(String documentIntermediator) {
+        this.documentIntermediator = documentIntermediator;
+    }
+
+    public String getDocumentPaymentInstitution() {
+        return documentPaymentInstitution;
+    }
+
+    public void setDocumentPaymentInstitution(String documentPaymentInstitution) {
+        this.documentPaymentInstitution = documentPaymentInstitution;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -565,6 +598,9 @@ public class Order {
             .add("fulfillment", fulfillment)
             .add("metadata", metadata)
             .add("orderTypeName", orderTypeName)
+            .add("documentIntermediator", documentIntermediator)
+            .add("intermediateRegistrationId", intermediateRegistrationId)
+            .add("documentPaymentInstitution", documentPaymentInstitution)
             .toString();
     }
 }
