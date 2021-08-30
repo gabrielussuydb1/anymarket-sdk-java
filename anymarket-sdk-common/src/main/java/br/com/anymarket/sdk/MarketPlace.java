@@ -86,7 +86,8 @@ public enum MarketPlace {
     SHOPEE("Shopee"),
     CASSOL_CENTERLAR("Cassol Centerlar"),
     MAXMANIA("Maxmania"),
-    ONSTORES("ONSTORES");
+    ONSTORES("ONSTORES"),
+    HOMEREFILL("Homerefill");
 
     private String name;
 
