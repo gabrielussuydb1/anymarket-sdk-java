@@ -80,7 +80,7 @@ public enum MarketPlace {
     RIACHUELO("Riachuelo"),
     CONECTA_LA("Conecta La"),
     OLIST("OLIST"),
-    RENNER("Renner"),
+    RENNER("Renner e Camicado"),
     AJPLACE("AJPlace"),
     CREDITAS("Creditas"),
     SHOPEE("Shopee"),
