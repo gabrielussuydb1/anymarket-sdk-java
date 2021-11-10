@@ -90,7 +90,8 @@ public enum MarketPlace {
     HOMEREFILL("Homerefill"),
     DOTZ("Dotz"),
     DECATHLON("Decathlon"),
-    FOODIES_STORE("Foodies Store");
+    FOODIES_STORE("Foodies Store"),
+    FACILY("Facily");
 
     private String name;
 
