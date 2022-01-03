@@ -5,6 +5,6 @@ package br.com.anymarket.sdk.product.dto;
  */
 public enum TransmissionStatus {
 
-    WAITING_SYNC, SENDING, PAUSING, CLOSING, ERROR, ACTIVATING, SYNCING, OK, RETRY
+    WAITING_SYNC, SENDING, PAUSING, CLOSING, ERROR, ACTIVATING, SYNCING, OK, RETRY, REMOVING
 
 }
