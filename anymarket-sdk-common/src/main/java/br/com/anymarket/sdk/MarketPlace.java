@@ -96,7 +96,8 @@ public enum MarketPlace {
     CASA_VIDEO("Casa & Vídeo"),
     SUPERCAMPO("SuperCampo"),
     FRAVEGA_MARKET("FravegaMarket"),
-    MEGATONE("MEGATONE");
+    MEGATONE("MEGATONE"),
+    BAIANAO("Baianao");
 
     private String name;
 
